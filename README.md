@@ -31,18 +31,17 @@ Once the extension is installed, simply use it in your code by  in config:
 'components' => array(
     ...
     'clickatell' => array(
-        'class' => 'albertborsos\clickatell\Clickatell',
+        'class' => 'albertborsos\clickatell\ClickatellHttp',
         'username' => 'your clickatell user',
         'password' => 'your clickatell password',
         'apiId' => 'your clickatell api id',
+        'from' => '+36xxxxxxxx' // optional parameter,
+        'mo' => 1 // optional parameter
     ),
     ...
 );
 ```
 Then:
 ```php
-Yii::$app->clickatell->send([
-	'to'=>'+36xxxxxxxxx',
-	'message'=>'Hello world!',
-]);
+Yii::$app->clickatell->sendMessage('+36xxxxxxxxx', 'Hello world!');
 ```
