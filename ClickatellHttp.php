@@ -13,18 +13,22 @@ class ClickatellHttp extends Component implements TransportInterface
     public $password;
     public $apiID;
 
+    /** @var boolean Whether to use https */
     public $secure = false;
 
-    /** @var \Clickatell\Api\ClickatellHttp */
-    private $_api;
-
-    public $to;
-    public $message;
-
+    /** @var string your US Longcode number; i.e. your two-way number */
     public $from;
+
+    /** @var integer MO is an abbreviation for "Mobile Originated", meaning a message that was sent from a handset to our servers.
+     * If you send a message to an US number you need to set the from parameter and the mo parameter to 1
+     * more info: http://kb.paessler.com/en/topic/43273-i-cannot-send-sms-text-messages-to-us-numbers-using-clickatell-what-can-i-do
+     */
     public $mo = 0;
 
     protected $_extra = [];
+
+    /** @var \Clickatell\Api\ClickatellHttp */
+    private $_api;
 
     public function init()
     {
