@@ -20,17 +20,31 @@ class ClickatellHttp extends Component
     public $to;
     public $message;
 
-    public $extra = [];
+    public $from;
+    public $mo = 0;
+
+    protected $_extra = [];
 
     public function init()
     {
         parent::init();
         $this->_api = new \Clickatell\Api\ClickatellHttp($this->username, $this->password, $this->apiID);
         $this->_api->secure($this->secure);
+        $this->setExtraParameters();
     }
 
-    public function sendMessage($to, $message, $extra){
+    public function sendMessage($to, $message, $extra = []){
+        $extra = array_merge($this->_extra, $extra);
         return $this->_api->sendMessage($to, $message, $extra);
+    }
+
+    private function setExtraParameters(){
+        if(!is_null($this->from)){
+            $this->_extra['from'] = $this->from;
+        }
+        if(!is_null($this->mo)){
+            $this->_extra['mo'] = $this->mo;
+        }
     }
 
 }
