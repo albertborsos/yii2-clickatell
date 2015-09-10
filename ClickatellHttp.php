@@ -33,6 +33,21 @@ class ClickatellHttp extends Component
         $this->setExtraParameters();
     }
 
+    /**
+     * API call for "sendMessage".
+     *
+     * Response format:
+     *      id      => string|false
+     *      to      => string
+     *      error   => string|false
+     *      code    => string|false
+     *
+     * @param array   $to       The recipient list
+     * @param string  $message  Message
+     * @param array   $extra    Extra parameters (based on Clickatell documents)
+     *
+     * @return array
+     */
     public function sendMessage($to, $message, $extra = []){
         $extra = array_merge($this->_extra, $extra);
         return $this->_api->sendMessage($to, $message, $extra);
