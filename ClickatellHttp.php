@@ -34,11 +34,12 @@ class ClickatellHttp extends Component implements TransportInterface
         $this->setExtraParameters();
     }
 
-    private function setExtraParameters(){
-        if(!is_null($this->from)){
+    private function setExtraParameters()
+    {
+        if (!is_null($this->from)) {
             $this->_extra['from'] = $this->from;
         }
-        if(!is_null($this->mo)){
+        if (!is_null($this->mo)) {
             $this->_extra['mo'] = $this->mo;
         }
     }
@@ -52,14 +53,16 @@ class ClickatellHttp extends Component implements TransportInterface
      *      error   => string|false
      *      code    => string|false
      *
-     * @param array   $to       The recipient list
-     * @param string  $message  Message
-     * @param array   $extra    Extra parameters (based on Clickatell documents)
+     * @param array $to The recipient list
+     * @param string $message Message
+     * @param array $extra Extra parameters (based on Clickatell documents)
      *
      * @return array
      */
-    public function sendMessage($to, $message, $extra = []){
+    public function sendMessage($to, $message, $extra = [])
+    {
         $extra = array_merge($this->_extra, $extra);
+
         return $this->_api->sendMessage($to, $message, $extra);
     }
 
