@@ -2,10 +2,11 @@
 
 namespace albertborsos\clickatell;
 
+use \Exception;
+use Clickatell\TransportInterface;
 use yii\base\Component;
-use yii\helpers\ArrayHelper;
 
-class ClickatellHttp extends Component
+class ClickatellHttp extends Component implements TransportInterface
 {
 
     public $username;
@@ -33,6 +34,15 @@ class ClickatellHttp extends Component
         $this->setExtraParameters();
     }
 
+    private function setExtraParameters(){
+        if(!is_null($this->from)){
+            $this->_extra['from'] = $this->from;
+        }
+        if(!is_null($this->mo)){
+            $this->_extra['mo'] = $this->mo;
+        }
+    }
+
     /**
      * API call for "sendMessage".
      *
@@ -53,13 +63,74 @@ class ClickatellHttp extends Component
         return $this->_api->sendMessage($to, $message, $extra);
     }
 
-    private function setExtraParameters(){
-        if(!is_null($this->from)){
-            $this->_extra['from'] = $this->from;
-        }
-        if(!is_null($this->mo)){
-            $this->_extra['mo'] = $this->mo;
-        }
+    /**
+     * API call for "getBalance".
+     *
+     * Response format:
+     *      balance => int
+     *
+     * @throws Exception
+     *
+     * @return int
+     */
+    public function getBalance()
+    {
+        return $this->_api->getBalance();
     }
 
+    /**
+     * API call for "stop message".
+     *
+     * @param string $apiMsgId ApiMsgId to query
+     *
+     * @throws Exception
+     *
+     * @return mixed
+     */
+    public function stopMessage($apiMsgId)
+    {
+        return $this->_api->stopMessage($apiMsgId);
+    }
+
+    /**
+     * API call for "queryMsg".
+     *
+     * @param string $apiMsgId ApiMsgId to query
+     *
+     * @throws Exception
+     *
+     * @return mixed
+     */
+    public function queryMessage($apiMsgId)
+    {
+        return $this->_api->queryMessage($apiMsgId);
+    }
+
+    /**
+     * API call for "routeCoverage".
+     *
+     * @param int $msisdn Number to check for coverage
+     *
+     * @throws Exception
+     *
+     * @return mixed
+     */
+    public function routeCoverage($msisdn)
+    {
+        return $this->_api->routeCoverage($msisdn);
+    }
+
+    /**
+     * API call for "getMsgCharge".
+     *
+     * @param string $apiMsgId ApiMsgId to query
+     *
+     * @throws Exception
+     *
+     * @return mixed
+     */
+    public function getMessageCharge($apiMsgId)
+    {
+        return $this->_api->getMessageCharge($apiMsgId);
+    }
 }
