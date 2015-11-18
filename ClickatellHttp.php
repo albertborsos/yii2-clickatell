@@ -138,6 +138,6 @@ class ClickatellHttp extends Component implements TransportInterface
      */
     public function getMessageCharge($apiMsgId, $cliMsgId = false)
     {
-        return $this->_api->getMessageCharge($apiMsgId,$cliMsgId);
+        return $this->_api->getMessageCharge($apiMsgId, $cliMsgId);
     }
 }
