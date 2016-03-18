@@ -132,7 +132,7 @@ class ClickatellHttp extends Component implements TransportInterface
      *
      * @param string $apiMsgId ApiMsgId to query
      *
-     * @throws Exception
+     * @param bool   $cliMsgId is this a client MsgId?
      *
      * @return mixed
      */
