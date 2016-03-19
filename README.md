@@ -11,7 +11,7 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist albertborsos/yii2-clickatell "*"
+php composer.phar require --prefer-dist "albertborsos/yii2-clickatell:0.4.*"
 ```
 
 or add
